@@ -1,0 +1,887 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+
+  .dash {
+    --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--font-family);
+    padding: 1.5rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--color-background-primary, #f8fafc);
+    color: var(--color-text-primary, #1e293b);
+    transition: all 0.3s ease;
+    
+    --color-background-secondary: #ffffff;
+    --color-text-primary: #1e293b;
+    --color-text-secondary: #64748b;
+    --color-text-tertiary: #94a3b8;
+    --color-border-secondary: #e2e8f0;
+    --color-border-tertiary: #f1f5f9;
+    --color-background-info: #eff6ff;
+    --color-text-info: #2563eb;
+    --border-radius-md: 10px;
+    --border-radius-lg: 16px;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+    --tab-hover-bg: rgba(255, 255, 255, 0.6);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .dash {
+      --color-background-secondary: #1e293b;
+      --color-text-primary: #f8fafc;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-border-secondary: #334155;
+      --color-border-tertiary: #475569;
+      --color-background-info: #1e3a8a;
+      --color-text-info: #60a5fa;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+      --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+      --tab-hover-bg: rgba(30, 41, 59, 0.6);
+    }
+  }
+
+  .dash-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border-tertiary);
+  }
+
+  .dash-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.5px;
+  }
+
+  .dash-subtitle {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-top: 4px;
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px;
+    margin-bottom: 2rem
+  }
+
+  .mc {
+    background: var(--color-background-secondary);
+    border: 1px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-lg);
+    padding: 16px 18px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .mc:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--card-accent);
+  }
+
+  .mc::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--card-accent);
+    opacity: 0.85;
+  }
+
+  .mc-content {
+    flex: 1;
+  }
+
+  .mc-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px
+  }
+
+  .mc-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+  }
+
+  .mc-sub {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    margin-top: 6px
+  }
+
+  .mc-icon {
+    color: var(--card-accent);
+    background: var(--color-border-tertiary);
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+    margin-left: 8px;
+    transition: transform 0.25s ease;
+  }
+
+  .mc:hover .mc-icon {
+    transform: scale(1.05);
+  }
+
+  .section {
+    background: var(--color-background-secondary);
+    border: 1px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 2rem;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border-tertiary);
+    letter-spacing: -0.2px;
+  }
+
+  .tabs {
+    display: inline-flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+    padding: 4px;
+    background: var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+  }
+
+  .tab {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    background: transparent;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tab:hover {
+    color: var(--color-text-primary);
+    background: var(--tab-hover-bg);
+  }
+
+  .tab.active {
+    background: var(--color-background-secondary);
+    color: var(--color-text-info);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .chart-wrap {
+    position: relative;
+    width: 100%
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary)
+  }
+
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-border-tertiary);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .legend .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0
+  }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem
+  }
+
+  /* Heatmap table styling */
+  .heatmap-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 4px;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  .heatmap-table th {
+    padding: 8px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-align: center;
+  }
+
+  .heatmap-table th:first-child {
+    text-align: left;
+  }
+
+  .heatmap-table td {
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
+
+  .heatmap-table td:first-child {
+    text-align: left;
+    background: transparent !important;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    padding-left: 4px;
+  }
+
+  .heatmap-table tr:hover td:not(:first-child) {
+    transform: scale(1.02);
+    filter: brightness(1.05);
+  }
+
+  @media(max-width:768px) {
+    .grid2 {
+      grid-template-columns: 1fr
+    }
+  }
+</style>
+
+<div class="dash">
+  <div class="dash-header">
+    <h1 class="dash-title">EduSim AI Benchmark</h1>
+    <p class="dash-subtitle">792 runs across 12 models</p>
+  </div>
+  <div class="metrics">
+    <div class="mc" style="--card-accent: #3b82f6;">
+      <div class="mc-content">
+        <div class="mc-label">Total runs</div>
+        <div class="mc-value">792</div>
+        <div class="mc-sub">12 models × 66 questions</div>
+      </div>
+      <div class="mc-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+      </div>
+    </div>
+    <div class="mc" style="--card-accent: #8b5cf6;">
+      <div class="mc-content">
+        <div class="mc-label">Avg judge score</div>
+        <div class="mc-value">7.59</div>
+        <div class="mc-sub">out of 10</div>
+      </div>
+      <div class="mc-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+      </div>
+    </div>
+    <div class="mc" style="--card-accent: #10b981;">
+      <div class="mc-content">
+        <div class="mc-label">Success rate</div>
+        <div class="mc-value">94.4%</div>
+        <div class="mc-sub">748 / 792</div>
+      </div>
+      <div class="mc-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11"></polyline></svg>
+      </div>
+    </div>
+    <div class="mc" style="--card-accent: #f43f5e;">
+      <div class="mc-content">
+        <div class="mc-label">Hallucinations</div>
+        <div class="mc-value">79</div>
+        <div class="mc-sub">10.0% of runs</div>
+      </div>
+      <div class="mc-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      </div>
+    </div>
+    <div class="mc" style="--card-accent: #f59e0b;">
+      <div class="mc-content">
+        <div class="mc-label">Avg latency</div>
+        <div class="mc-value">23.6s</div>
+        <div class="mc-sub">model response</div>
+      </div>
+      <div class="mc-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      </div>
+    </div>
+    <div class="mc" style="--card-accent: #06b6d4;">
+      <div class="mc-content">
+        <div class="mc-label">Avg cost/run</div>
+        <div class="mc-value">$0.004</div>
+        <div class="mc-sub">USD per question</div>
+      </div>
+      <div class="mc-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      </div>
+    </div>
+    <div class="mc" style="--card-accent: #e11d48;">
+      <div class="mc-content">
+        <div class="mc-label">Total eval cost</div>
+        <div class="mc-value">$3.51</div>
+        <div class="mc-sub">all runs & retries</div>
+      </div>
+      <div class="mc-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Total Evaluation Cost Summary</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+      <div style="background: var(--color-border-tertiary); padding: 12px 16px; border-radius: 8px;">
+        <div style="font-size: 11px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Total Spent (All Runs)</div>
+        <div style="font-size: 20px; font-weight: 700; color: #f43f5e; margin-top: 4px;">$3.51</div>
+        <div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px;">Includes failures & retries</div>
+      </div>
+      <div style="background: var(--color-border-tertiary); padding: 12px 16px; border-radius: 8px;">
+        <div style="font-size: 11px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Successful Runs Cost</div>
+        <div style="font-size: 20px; font-weight: 700; color: #10b981; margin-top: 4px;">$3.13</div>
+        <div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px;">Spent on benchmark scores</div>
+      </div>
+      <div style="background: var(--color-border-tertiary); padding: 12px 16px; border-radius: 8px;">
+        <div style="font-size: 11px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Overhead / Retries Cost</div>
+        <div style="font-size: 20px; font-weight: 700; color: #f59e0b; margin-top: 4px;">$0.37</div>
+        <div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px;">Rate limit retries & failures</div>
+      </div>
+    </div>
+    
+    <div id="costBreakdownTableContainer"></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('scores')">Score comparison</button>
+    <button class="tab" onclick="showTab('heatmap')">Score heatmap</button>
+    <button class="tab" onclick="showTab('perf')">Latency & cost</button>
+    <button class="tab" onclick="showTab('quality')">Quality vs speed</button>
+    <button class="tab" onclick="showTab('halluc')">Hallucinations</button>
+    <button class="tab" onclick="showTab('tokens')">Token usage</button>
+    <button class="tab" onclick="showTab('judge')">Judge evaluation</button>
+  </div>
+
+  <div id="tab-scores" class="section">
+    <div class="section-title">Average scores per model (accuracy · quality · educational · judge)</div>
+    <div class="legend">
+      <span><span class="dot" style="background:#378ADD"></span>Accuracy</span>
+      <span><span class="dot" style="background:#1D9E75"></span>Quality</span>
+      <span><span class="dot" style="background:#BA7517"></span>Educational</span>
+      <span><span class="dot" style="background:#7F77DD"></span>Judge score</span>
+    </div>
+    <div class="chart-wrap" style="height:360px"><canvas id="cScores" role="img"
+        aria-label="Grouped bar chart showing accuracy, quality, educational and judge scores for 12 models. Claude 3.5 Sonnet and gpt-oss-120b lead. Gemma-E4B scores near zero.">Score
+        comparison across 12 models on 4 metrics.</canvas></div>
+  </div>
+
+  <div id="tab-heatmap" class="section" style="display:none">
+    <div class="section-title">Score heatmap — model × metric (darker = higher)</div>
+    <div id="heatmapContainer" style="overflow-x:auto"></div>
+  </div>
+
+  <div id="tab-perf" class="section" style="display:none">
+    <div class="section-title">Average latency (ms) and cost per run (USD) by model</div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Avg response latency (ms)</div>
+        <div class="chart-wrap" style="height:320px"><canvas id="cLatency" role="img"
+            aria-label="Horizontal bar chart of average latency per model. DeepSeek R1 is slowest. gpt-oss-120b Cerebras is fastest.">Latency
+            comparison.</canvas></div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Avg cost per run (USD)</div>
+        <div class="chart-wrap" style="height:320px"><canvas id="cCost" role="img"
+            aria-label="Horizontal bar chart of average cost per run. Claude and zai-glm are most expensive.">Cost
+            comparison.</canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-quality" class="section" style="display:none">
+    <div class="section-title">Judge score vs avg latency — bubble size = avg cost</div>
+    <div class="chart-wrap" style="height:360px"><canvas id="cScatter" role="img"
+        aria-label="Bubble chart: x-axis latency, y-axis judge score, bubble size = cost. gpt-oss-120b Cerebras is best value — high score, low latency, low cost.">Quality
+        vs speed trade-off across models.</canvas></div>
+  </div>
+
+  <div id="tab-halluc" class="section" style="display:none">
+    <div class="section-title">Hallucinations and failures per model</div>
+    <div class="legend">
+      <span><span class="dot" style="background:#E24B4A"></span>Hallucinations</span>
+      <span><span class="dot" style="background:#888780;opacity:.55"></span>Failures</span>
+    </div>
+    <div class="chart-wrap" style="height:360px"><canvas id="cHalluc" role="img"
+        aria-label="Stacked bar chart of hallucinations and failures per model. Gemma-E4B has 57 hallucinations, far more than all others combined.">Hallucination
+        and failure counts per model.</canvas></div>
+  </div>
+
+  <div id="tab-tokens" class="section" style="display:none">
+    <div class="section-title">Average token usage per run (prompt vs completion)</div>
+    <div class="legend">
+      <span><span class="dot" style="background:#185FA5"></span>Prompt tokens</span>
+      <span><span class="dot" style="background:#5DCAA5"></span>Completion tokens</span>
+    </div>
+    <div class="chart-wrap" style="height:360px"><canvas id="cTokens" role="img"
+        aria-label="Stacked bar chart of average prompt and completion tokens per model. Claude 3.5 Sonnet and zai-glm generate the most completion tokens.">Token
+        usage per model.</canvas></div>
+  </div>
+
+  <div id="tab-judge" class="section" style="display:none">
+    <div class="section-title">Judge evaluation metrics (meta-llama/llama-3.3-70b-instruct)</div>
+    
+    <!-- High level Judge stats cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+      <div style="background: var(--color-border-tertiary); padding: 12px 16px; border-radius: 8px;">
+        <div style="font-size: 11px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Judge LLM</div>
+        <div style="font-size: 17px; font-weight: 700; color: #3b82f6; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Llama-3.3-70b</div>
+        <div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px;">770 successful runs</div>
+      </div>
+      <div style="background: var(--color-border-tertiary); padding: 12px 16px; border-radius: 8px;">
+        <div style="font-size: 11px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Total Judge Cost</div>
+        <div style="font-size: 20px; font-weight: 700; color: #ec4899; margin-top: 4px;">$1.45</div>
+        <div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px;">USD overall</div>
+      </div>
+      <div style="background: var(--color-border-tertiary); padding: 12px 16px; border-radius: 8px;">
+        <div style="font-size: 11px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Avg Judge Latency</div>
+        <div style="font-size: 20px; font-weight: 700; color: #f59e0b; margin-top: 4px;">7.04s</div>
+        <div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px;">Response time per run</div>
+      </div>
+      <div style="background: var(--color-border-tertiary); padding: 12px 16px; border-radius: 8px;">
+        <div style="font-size: 11px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Total Judge Tokens</div>
+        <div style="font-size: 20px; font-weight: 700; color: #10b981; margin-top: 4px;">1.98M</div>
+        <div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px;">1.84M in / 0.15M out</div>
+      </div>
+    </div>
+
+    <!-- Charts row -->
+    <div class="grid2" style="margin-bottom: 2rem;">
+      <div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Avg judge latency (s) per evaluated model</div>
+        <div class="chart-wrap" style="height:320px"><canvas id="cJudgeLatency" role="img"
+            aria-label="Horizontal bar chart of average judge latency per model.">Judge latency comparison.</canvas></div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Total judge cost (USD) per evaluated model</div>
+        <div class="chart-wrap" style="height:320px"><canvas id="cJudgeCost" role="img"
+            aria-label="Horizontal bar chart of total judge cost per model.">Judge cost comparison.</canvas></div>
+      </div>
+    </div>
+
+    <!-- Stacked Token chart -->
+    <div style="margin-bottom: 2rem;">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Average judge tokens per run (prompt vs completion)</div>
+      <div class="legend">
+        <span><span class="dot" style="background:#1e3a8a"></span>Prompt tokens</span>
+        <span><span class="dot" style="background:#60a5fa"></span>Completion tokens</span>
+      </div>
+      <div class="chart-wrap" style="height:320px"><canvas id="cJudgeTokens" role="img"
+          aria-label="Stacked bar chart of average judge prompt and completion tokens per model.">Judge token usage.</canvas></div>
+    </div>
+
+    <!-- Judge metrics table -->
+    <div>
+      <div style="font-size: 14.5px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 1rem;">Detailed Judge Metrics by Model</div>
+      <div id="judgeBreakdownTableContainer"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+  const AGG = [
+    { m: "DeepSeek R1", acc: 8.97, qua: 9.00, edu: 8.86, jud: 8.94, lat: 86850, cost: 0.0049, hall: 1, fail: 2, pt: 365, ct: 2207, jpt: 1880.9, jct: 174.1, jl: 5804.1, jc: 0.1021 },
+    { m: "Claude 3.5 Sonnet", acc: 8.89, qua: 9.00, edu: 8.82, jud: 8.90, lat: 61947, cost: 0.0101, hall: 0, fail: 0, pt: 439, ct: 4818, jpt: 4779.9, jct: 182.1, jl: 7360.3, jc: 0.2181 },
+    { m: "Gemini 3 Flash Preview", acc: 8.92, qua: 8.94, edu: 8.73, jud: 8.86, lat: 6293, cost: 0.0028, hall: 0, fail: 2, pt: 383, ct: 915, jpt: 1660.2, jct: 176.1, jl: 6121.0, jc: 0.0936 },
+    { m: "Gemini 2.5 Flash", acc: 8.77, qua: 8.92, edu: 8.77, jud: 8.82, lat: 10143, cost: 0.0044, hall: 2, fail: 5, pt: 384, ct: 1869, jpt: 2070.0, jct: 167.0, jl: 8682.6, jc: 0.1084 },
+    { m: "gpt-oss-120b (Groq)", acc: 8.89, qua: 8.48, edu: 8.74, jud: 8.70, lat: 5003, cost: 0.0011, hall: 0, fail: 1, pt: 430, ct: 1736, jpt: 2059.1, jct: 190.5, jl: 7749.1, jc: 0.1117 },
+    { m: "gpt-oss-120b (Cerebras)", acc: 8.89, qua: 8.39, edu: 8.79, jud: 8.69, lat: 1469, cost: 0.0010, hall: 2, fail: 0, pt: 430, ct: 1590, jpt: 1990.8, jct: 190.7, jl: 6997.3, jc: 0.1090 },
+    { m: "qwen-3-235b-a22b-instruct-2507", acc: 8.79, qua: 8.71, edu: 8.57, jud: 8.69, lat: 36149, cost: 0.0021, hall: 2, fail: 3, pt: 377, ct: 918, jpt: 1616.5, jct: 182.4, jl: 6772.5, jc: 0.0929 },
+    { m: "Gemini Flash Lite (3.1)", acc: 8.31, qua: 8.55, edu: 8.32, jud: 8.39, lat: 13382, cost: 0.0064, hall: 4, fail: 1, pt: 384, ct: 2346, jpt: 2994.3, jct: 192.7, jl: 7473.9, jc: 0.1491 },
+    { m: "gpt-oss-20b (Groq)", acc: 8.48, qua: 8.11, edu: 8.16, jud: 8.25, lat: 3026, cost: 0.0004, hall: 1, fail: 22, pt: 431, ct: 1759, jpt: 1032.6, jct: 132.9, jl: 5220.1, jc: 0.0619 },
+    { m: "zai-glm-4.7 (Cerebras)", acc: 8.09, qua: 8.47, edu: 8.19, jud: 8.25, lat: 7273, cost: 0.0102, hall: 4, fail: 2, pt: 361, ct: 5069, jpt: 4148.7, jct: 192.1, jl: 7257.4, jc: 0.1947 },
+    { m: "GPT-4o-mini", acc: 7.98, qua: 7.97, edu: 7.77, jud: 7.91, lat: 8387, cost: 0.0004, hall: 6, fail: 4, pt: 367, ct: 642, jpt: 1305.3, jct: 191.3, jl: 6199.3, jc: 0.0820 },
+    { m: "Gemma-E4B", acc: 1.30, qua: 3.08, edu: 1.73, jud: 2.04, lat: 39006, cost: 0.0036, hall: 57, fail: 2, pt: 394, ct: 1670, jpt: 2301.0, jct: 230.2, jl: 8824.5, jc: 0.1276 },
+  ];
+
+  const MODELS = AGG.map(d => d.m);
+  const SHORT = MODELS.map(m => m === "qwen-3-235b-a22b-instruct-2507" ? "qwen-3-235b" : (m.length > 18 ? m.slice(0, 16) + '…' : m));
+  const PALETTE = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899', '#3b82f6', '#06b6d4', '#84cc16', '#6366f1', '#f43f5e', '#14b8a6', '#64748b'];
+
+  // Global Chart.js configuration defaults
+  if (typeof Chart !== 'undefined') {
+    Chart.defaults.font.family = "'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.color = 'var(--color-text-secondary)';
+    Chart.defaults.plugins.tooltip.padding = 10;
+    Chart.defaults.plugins.tooltip.cornerRadius = 8;
+    Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(15, 23, 42, 0.95)';
+    Chart.defaults.plugins.tooltip.titleFont = { size: 12, weight: '600' };
+    Chart.defaults.plugins.tooltip.bodyFont = { size: 11 };
+    Chart.defaults.plugins.tooltip.titleColor = '#ffffff';
+    Chart.defaults.plugins.tooltip.bodyColor = '#ffffff';
+    Chart.defaults.plugins.tooltip.borderColor = 'var(--color-border-secondary)';
+    Chart.defaults.plugins.tooltip.borderWidth = 1;
+  }
+
+  function showTab(id) {
+    ['scores', 'heatmap', 'perf', 'quality', 'halluc', 'tokens', 'judge'].forEach(t => {
+      document.getElementById('tab-' + t).style.display = t === id ? 'block' : 'none';
+    });
+    document.querySelectorAll('.tab').forEach((b, i) => {
+      b.classList.toggle('active', ['scores', 'heatmap', 'perf', 'quality', 'halluc', 'tokens', 'judge'][i] === id);
+    });
+    if (id === 'heatmap') buildHeatmap();
+    if (id === 'perf') buildCostTable();
+    if (id === 'judge') buildJudgeSection();
+    try {
+      localStorage.setItem('activeTab', id);
+    } catch (e) {}
+  }
+
+  let chartsBuilt = {};
+  function lazyBuild() {
+    if (!chartsBuilt.scores) {
+      chartsBuilt.scores = true;
+      new Chart(document.getElementById('cScores'), {
+        type: 'bar',
+        data: {
+          labels: SHORT,
+          datasets: [
+            { label: 'Accuracy', data: AGG.map(d => d.acc), backgroundColor: '#3b82f6', borderRadius: 4, borderSkipped: false },
+            { label: 'Quality', data: AGG.map(d => d.qua), backgroundColor: '#10b981', borderRadius: 4, borderSkipped: false },
+            { label: 'Educational', data: AGG.map(d => d.edu), backgroundColor: '#f59e0b', borderRadius: 4, borderSkipped: false },
+            { label: 'Judge', data: AGG.map(d => d.jud), backgroundColor: '#8b5cf6', borderRadius: 4, borderSkipped: false },
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.parsed.y.toFixed(2) } } },
+          scales: {
+            x: { border: { display: false }, grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 40, autoSkip: false, color: 'var(--color-text-secondary)' } },
+            y: { min: 0, max: 10, border: { display: false }, grid: { color: 'var(--color-border-tertiary)' }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } }
+          }
+        }
+      });
+      buildPerf(); buildScatter(); buildHalluc(); buildTokens(); buildCostTable();
+    }
+  }
+
+  function buildHeatmap() {
+    const metrics = ['Accuracy', 'Quality', 'Educational', 'Judge'];
+    const keys = ['acc', 'qua', 'edu', 'jud'];
+    let html = '<table class="heatmap-table">';
+    html += '<thead><tr><th>Model</th>';
+    metrics.forEach(m => html += `<th>${m}</th>`);
+    html += '</tr></thead><tbody>';
+    AGG.forEach(d => {
+      html += `<tr>`;
+      html += `<td>${d.m}</td>`;
+      keys.forEach(k => {
+        const v = d[k];
+        const pct = v / 10;
+        const r = Math.round(255 * (1 - pct) * 0.6 + pct * 24);
+        const g = Math.round(255 * (1 - pct) * 0.6 + pct * 158);
+        const b = Math.round(255 * (1 - pct) * 0.6 + pct * 117);
+        const bg = `rgb(${r},${g},${b})`;
+        const fg = pct > 0.65 ? '#085041' : '#ffffff';
+        html += `<td style="background:${bg};color:${fg}">${v.toFixed(1)}</td>`;
+      });
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+    document.getElementById('heatmapContainer').innerHTML = html;
+  }
+
+  function buildCostTable() {
+    const totalLbCost = 3.131321;
+    let html = '<table class="heatmap-table" style="margin-top: 15px;">';
+    html += '<thead><tr><th style="text-align:left;">Model Name</th><th style="text-align:right;">Total Cost (Successful Runs)</th><th style="text-align:right;">Avg Cost / Run</th><th style="text-align:right;">% of Leaderboard Cost</th></tr></thead><tbody>';
+    
+    const modelCosts = {
+      "DeepSeek R1": 0.322142,
+      "Claude 3.5 Sonnet": 0.664910,
+      "Gemini 3 Flash Preview": 0.187859,
+      "Gemini 2.5 Flash": 0.291972,
+      "gpt-oss-120b (Groq)": 0.071918,
+      "gpt-oss-120b (Cerebras)": 0.067230,
+      "qwen-3-235b-a22b-instruct-2507": 0.139456,
+      "Gemini Flash Lite (3.1)": 0.422951,
+      "gpt-oss-20b (Groq)": 0.024645,
+      "zai-glm-4.7 (Cerebras)": 0.671915,
+      "GPT-4o-mini": 0.027311,
+      "Gemma-E4B": 0.239012
+    };
+
+    AGG.forEach(d => {
+      const totalCost = modelCosts[d.m] || (d.cost * 66);
+      const pct = (totalCost / totalLbCost) * 100;
+      html += `<tr>`;
+      html += `<td style="text-align:left;color:var(--color-text-primary);padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);">${d.m}</td>`;
+      html += `<td style="text-align:right;color:var(--color-text-primary);padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);font-weight:600;">$${totalCost.toFixed(4)}</td>`;
+      html += `<td style="text-align:right;color:var(--color-text-secondary);padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);">$${d.cost.toFixed(4)}</td>`;
+      html += `<td style="text-align:right;color:var(--color-text-secondary);padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);font-weight:600;">${pct.toFixed(1)}%</td>`;
+      html += `</tr>`;
+    });
+    html += '</tbody></table>';
+    document.getElementById('costBreakdownTableContainer').innerHTML = html;
+  }
+
+  function buildPerf() {
+    const sorted = [...AGG].sort((a, b) => b.lat - a.lat);
+    new Chart(document.getElementById('cLatency'), {
+      type: 'bar',
+      data: { 
+        labels: sorted.map(d => d.m === "qwen-3-235b-a22b-instruct-2507" ? "qwen-3-235b" : (d.m.length > 18 ? d.m.slice(0, 16) + '…' : d.m)), 
+        datasets: [{ label: 'Latency ms', data: sorted.map(d => Math.round(d.lat)), backgroundColor: '#6366f1', borderRadius: 4 }] 
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => Math.round(c.parsed.x / 1000 * 10) / 10 + 's' } } },
+        scales: { 
+          x: { border: { display: false }, grid: { color: 'var(--color-border-tertiary)' }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)', callback: v => v >= 1000 ? (v / 1000).toFixed(0) + 's' : v + 'ms' } }, 
+          y: { border: { display: false }, grid: { display: false }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } } 
+        }
+      }
+    });
+    const sortedC = [...AGG].sort((a, b) => b.cost - a.cost);
+    new Chart(document.getElementById('cCost'), {
+      type: 'bar',
+      data: { 
+        labels: sortedC.map(d => d.m === "qwen-3-235b-a22b-instruct-2507" ? "qwen-3-235b" : (d.m.length > 18 ? d.m.slice(0, 16) + '…' : d.m)), 
+        datasets: [{ label: 'Cost USD', data: sortedC.map(d => parseFloat(d.cost.toFixed(4))), backgroundColor: '#06b6d4', borderRadius: 4 }] 
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => '$' + c.parsed.x.toFixed(4) } } },
+        scales: { 
+          x: { border: { display: false }, grid: { color: 'var(--color-border-tertiary)' }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)', callback: v => '$' + v.toFixed(3) } }, 
+          y: { border: { display: false }, grid: { display: false }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } } 
+        }
+      }
+    });
+  }
+
+  function buildScatter() {
+    const maxCost = Math.max(...AGG.map(d => d.cost));
+    new Chart(document.getElementById('cScatter'), {
+      type: 'bubble',
+      data: {
+        datasets: [{
+          label: 'Models',
+          data: AGG.map((d, i) => ({ x: Math.round(d.lat / 1000), y: parseFloat(d.jud.toFixed(2)), r: Math.max(6, d.cost / maxCost * 28), model: d.m })),
+          backgroundColor: AGG.map((_, i) => PALETTE[i] + 'CC'),
+          borderColor: AGG.map((_, i) => PALETTE[i]),
+          borderWidth: 1.5
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }, tooltip: {
+            callbacks: {
+              label: c => { const d = c.raw; return `${d.model} | lat:${d.x}s | score:${d.y} | cost:$${AGG[c.dataIndex].cost.toFixed(4)}` }
+            }
+          }
+        },
+        layout: { padding: { top: 10, bottom: 10, left: 20, right: 20 } },
+        scales: {
+          x: { 
+            border: { display: false }, 
+            grid: { color: 'var(--color-border-tertiary)' }, 
+            title: { display: true, text: 'Avg latency (s)', font: { size: 11, weight: '600' }, color: 'var(--color-text-secondary)' }, 
+            min: -5, 
+            ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } 
+          },
+          y: { 
+            border: { display: false }, 
+            grid: { color: 'var(--color-border-tertiary)' }, 
+            title: { display: true, text: 'Judge score', font: { size: 11, weight: '600' }, color: 'var(--color-text-secondary)' }, 
+            min: 0, max: 11, 
+            ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } 
+          }
+        }
+      }
+    });
+  }
+
+  function buildHalluc() {
+    new Chart(document.getElementById('cHalluc'), {
+      type: 'bar',
+      data: {
+        labels: SHORT,
+        datasets: [
+          { label: 'Hallucinations', data: AGG.map(d => d.hall), backgroundColor: '#f43f5e', borderRadius: 4, borderSkipped: false },
+          { label: 'Failures', data: AGG.map(d => d.fail), backgroundColor: 'rgba(148, 163, 184, 0.4)', borderRadius: 4, borderSkipped: false },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { stacked: true, border: { display: false }, grid: { display: false }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)', maxRotation: 40, autoSkip: false } },
+          y: { stacked: true, border: { display: false }, grid: { color: 'var(--color-border-tertiary)' }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } }
+        }
+      }
+    });
+  }
+
+  function buildTokens() {
+    new Chart(document.getElementById('cTokens'), {
+      type: 'bar',
+      data: {
+        labels: SHORT,
+        datasets: [
+          { label: 'Prompt tokens', data: AGG.map(d => d.pt), backgroundColor: '#3b82f6', borderRadius: 4, borderSkipped: false },
+          { label: 'Completion tokens', data: AGG.map(d => d.ct), backgroundColor: '#10b981', borderRadius: 4, borderSkipped: false },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { stacked: true, border: { display: false }, grid: { display: false }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)', maxRotation: 40, autoSkip: false } },
+          y: { stacked: true, border: { display: false }, grid: { color: 'var(--color-border-tertiary)' }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } }
+        }
+      }
+    });
+  }
+
+  let judgeChartsBuilt = false;
+  function buildJudgeSection() {
+    buildJudgeTable();
+    if (!judgeChartsBuilt) {
+      judgeChartsBuilt = true;
+      buildJudgeCharts();
+    }
+  }
+
+  function buildJudgeTable() {
+    let html = '<table class="heatmap-table" style="margin-top: 15px;">';
+    html += '<thead><tr><th style="text-align:left;">Evaluated Model</th><th style="text-align:right;">Avg Judge Score</th><th style="text-align:right;">Avg Judge Latency</th><th style="text-align:right;">Total Judge Cost</th><th style="text-align:right;">Avg Judge Tokens</th></tr></thead><tbody>';
+    
+    AGG.forEach(d => {
+      html += `<tr>`;
+      html += `<td style="text-align:left;color:var(--color-text-primary);padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);">${d.m}</td>`;
+      html += `<td style="text-align:right;color:var(--color-text-primary);padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);font-weight:600;">${d.jud.toFixed(2)}</td>`;
+      html += `<td style="text-align:right;color:var(--color-text-secondary);padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);">${(d.jl / 1000).toFixed(2)}s</td>`;
+      html += `<td style="text-align:right;color:var(--color-text-secondary);padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);font-weight:600;">$${d.jc.toFixed(4)}</td>`;
+      html += `<td style="text-align:right;color:var(--color-text-secondary);padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);">${Math.round(d.jpt + d.jct)}</td>`;
+      html += `</tr>`;
+    });
+    html += '</tbody></table>';
+    document.getElementById('judgeBreakdownTableContainer').innerHTML = html;
+  }
+
+  function buildJudgeCharts() {
+    const sortedL = [...AGG].sort((a, b) => b.jl - a.jl);
+    new Chart(document.getElementById('cJudgeLatency'), {
+      type: 'bar',
+      data: {
+        labels: sortedL.map(d => d.m === "qwen-3-235b-a22b-instruct-2507" ? "qwen-3-235b" : (d.m.length > 18 ? d.m.slice(0, 16) + '…' : d.m)),
+        datasets: [{ label: 'Avg Latency s', data: sortedL.map(d => d.jl / 1000), backgroundColor: '#f59e0b', borderRadius: 4 }]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x.toFixed(2) + 's' } } },
+        scales: {
+          x: { border: { display: false }, grid: { color: 'var(--color-border-tertiary)' }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } },
+          y: { border: { display: false }, grid: { display: false }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } }
+        }
+      }
+    });
+
+    const sortedC = [...AGG].sort((a, b) => b.jc - a.jc);
+    new Chart(document.getElementById('cJudgeCost'), {
+      type: 'bar',
+      data: {
+        labels: sortedC.map(d => d.m === "qwen-3-235b-a22b-instruct-2507" ? "qwen-3-235b" : (d.m.length > 18 ? d.m.slice(0, 16) + '…' : d.m)),
+        datasets: [{ label: 'Total Cost USD', data: sortedC.map(d => d.jc), backgroundColor: '#ec4899', borderRadius: 4 }]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => '$' + c.parsed.x.toFixed(4) } } },
+        scales: {
+          x: { border: { display: false }, grid: { color: 'var(--color-border-tertiary)' }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)', callback: v => '$' + v.toFixed(3) } },
+          y: { border: { display: false }, grid: { display: false }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } }
+        }
+      }
+    });
+
+    new Chart(document.getElementById('cJudgeTokens'), {
+      type: 'bar',
+      data: {
+        labels: SHORT,
+        datasets: [
+          { label: 'Prompt tokens', data: AGG.map(d => d.jpt), backgroundColor: '#1e3a8a', borderRadius: 4, borderSkipped: false },
+          { label: 'Completion tokens', data: AGG.map(d => d.jct), backgroundColor: '#60a5fa', borderRadius: 4, borderSkipped: false },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { stacked: true, border: { display: false }, grid: { display: false }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)', maxRotation: 40, autoSkip: false } },
+          y: { stacked: true, border: { display: false }, grid: { color: 'var(--color-border-tertiary)' }, ticks: { font: { size: 10 }, color: 'var(--color-text-secondary)' } }
+        }
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    lazyBuild();
+    try {
+      const savedTab = localStorage.getItem('activeTab');
+      if (savedTab) {
+        showTab(savedTab);
+      }
+    } catch (e) {}
+  });
+  setTimeout(() => {
+    lazyBuild();
+    try {
+      const savedTab = localStorage.getItem('activeTab');
+      if (savedTab) {
+        showTab(savedTab);
+      }
+    } catch (e) {}
+  }, 300);
+</script>

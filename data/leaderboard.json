@@ -1,0 +1,122 @@
+[
+  {
+    "model": "DeepSeek R1",
+    "avgAccuracy": 8.97,
+    "avgQuality": 9,
+    "avgEducational": 8.86,
+    "avgScore": 8.94,
+    "avgLatencyMs": 86850,
+    "totalCostUsd": 0.322142,
+    "successRate": 0.97
+  },
+  {
+    "model": "Claude 3.5 Sonnet",
+    "avgAccuracy": 8.89,
+    "avgQuality": 9,
+    "avgEducational": 8.82,
+    "avgScore": 8.9,
+    "avgLatencyMs": 61947,
+    "totalCostUsd": 0.66491,
+    "successRate": 1
+  },
+  {
+    "model": "Gemini 3 Flash Preview",
+    "avgAccuracy": 8.92,
+    "avgQuality": 8.94,
+    "avgEducational": 8.73,
+    "avgScore": 8.86,
+    "avgLatencyMs": 6293,
+    "totalCostUsd": 0.187859,
+    "successRate": 0.97
+  },
+  {
+    "model": "Gemini 2.5 Flash",
+    "avgAccuracy": 8.77,
+    "avgQuality": 8.92,
+    "avgEducational": 8.77,
+    "avgScore": 8.82,
+    "avgLatencyMs": 10143,
+    "totalCostUsd": 0.291972,
+    "successRate": 0.924
+  },
+  {
+    "model": "gpt-oss-120b (Groq)",
+    "avgAccuracy": 8.89,
+    "avgQuality": 8.48,
+    "avgEducational": 8.74,
+    "avgScore": 8.7,
+    "avgLatencyMs": 5003,
+    "totalCostUsd": 0.071918,
+    "successRate": 0.985
+  },
+  {
+    "model": "gpt-oss-120b (Cerebras)",
+    "avgAccuracy": 8.89,
+    "avgQuality": 8.39,
+    "avgEducational": 8.79,
+    "avgScore": 8.69,
+    "avgLatencyMs": 1469,
+    "totalCostUsd": 0.06723,
+    "successRate": 1
+  },
+  {
+    "model": "qwen-3-235b-a22b-instruct-2507",
+    "avgAccuracy": 8.79,
+    "avgQuality": 8.71,
+    "avgEducational": 8.57,
+    "avgScore": 8.69,
+    "avgLatencyMs": 36149,
+    "totalCostUsd": 0.139456,
+    "successRate": 0.955
+  },
+  {
+    "model": "Gemini Flash Lite (3.1)",
+    "avgAccuracy": 8.31,
+    "avgQuality": 8.55,
+    "avgEducational": 8.32,
+    "avgScore": 8.39,
+    "avgLatencyMs": 13382,
+    "totalCostUsd": 0.422951,
+    "successRate": 0.985
+  },
+  {
+    "model": "gpt-oss-20b (Groq)",
+    "avgAccuracy": 8.48,
+    "avgQuality": 8.11,
+    "avgEducational": 8.16,
+    "avgScore": 8.25,
+    "avgLatencyMs": 3026,
+    "totalCostUsd": 0.024645,
+    "successRate": 0.667
+  },
+  {
+    "model": "zai-glm-4.7 (Cerebras)",
+    "avgAccuracy": 8.09,
+    "avgQuality": 8.47,
+    "avgEducational": 8.19,
+    "avgScore": 8.25,
+    "avgLatencyMs": 7273,
+    "totalCostUsd": 0.671915,
+    "successRate": 0.97
+  },
+  {
+    "model": "GPT-4o-mini",
+    "avgAccuracy": 7.98,
+    "avgQuality": 7.97,
+    "avgEducational": 7.77,
+    "avgScore": 7.91,
+    "avgLatencyMs": 8387,
+    "totalCostUsd": 0.027311,
+    "successRate": 0.939
+  },
+  {
+    "model": "Gemma-E4B",
+    "avgAccuracy": 1.3,
+    "avgQuality": 3.08,
+    "avgEducational": 1.73,
+    "avgScore": 2.04,
+    "avgLatencyMs": 39006,
+    "totalCostUsd": 0.239012,
+    "successRate": 0.97
+  }
+]

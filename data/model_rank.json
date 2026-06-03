@@ -1,0 +1,134 @@
+[
+  {
+    "Rank": 1,
+    "Model Name": "DeepSeek R1",
+    "Avg Score": 8.94,
+    "Accuracy": 8.97,
+    "Quality": 9,
+    "Educational": 8.86,
+    "Latency (ms)": 86850,
+    "Total Cost (USD)": 0.322142,
+    "Success Rate": 0.97
+  },
+  {
+    "Rank": 2,
+    "Model Name": "Claude 3.5 Sonnet",
+    "Avg Score": 8.9,
+    "Accuracy": 8.89,
+    "Quality": 9,
+    "Educational": 8.82,
+    "Latency (ms)": 61947,
+    "Total Cost (USD)": 0.66491,
+    "Success Rate": 1
+  },
+  {
+    "Rank": 3,
+    "Model Name": "Gemini 3 Flash Preview",
+    "Avg Score": 8.86,
+    "Accuracy": 8.92,
+    "Quality": 8.94,
+    "Educational": 8.73,
+    "Latency (ms)": 6293,
+    "Total Cost (USD)": 0.187859,
+    "Success Rate": 0.97
+  },
+  {
+    "Rank": 4,
+    "Model Name": "Gemini 2.5 Flash",
+    "Avg Score": 8.82,
+    "Accuracy": 8.77,
+    "Quality": 8.92,
+    "Educational": 8.77,
+    "Latency (ms)": 10143,
+    "Total Cost (USD)": 0.291972,
+    "Success Rate": 0.924
+  },
+  {
+    "Rank": 5,
+    "Model Name": "gpt-oss-120b (Groq)",
+    "Avg Score": 8.7,
+    "Accuracy": 8.89,
+    "Quality": 8.48,
+    "Educational": 8.74,
+    "Latency (ms)": 5003,
+    "Total Cost (USD)": 0.071918,
+    "Success Rate": 0.985
+  },
+  {
+    "Rank": 6,
+    "Model Name": "gpt-oss-120b (Cerebras)",
+    "Avg Score": 8.69,
+    "Accuracy": 8.89,
+    "Quality": 8.39,
+    "Educational": 8.79,
+    "Latency (ms)": 1469,
+    "Total Cost (USD)": 0.06723,
+    "Success Rate": 1
+  },
+  {
+    "Rank": 7,
+    "Model Name": "qwen-3-235b-a22b-instruct-2507",
+    "Avg Score": 8.69,
+    "Accuracy": 8.79,
+    "Quality": 8.71,
+    "Educational": 8.57,
+    "Latency (ms)": 36149,
+    "Total Cost (USD)": 0.139456,
+    "Success Rate": 0.955
+  },
+  {
+    "Rank": 8,
+    "Model Name": "Gemini Flash Lite (3.1)",
+    "Avg Score": 8.39,
+    "Accuracy": 8.31,
+    "Quality": 8.55,
+    "Educational": 8.32,
+    "Latency (ms)": 13382,
+    "Total Cost (USD)": 0.422951,
+    "Success Rate": 0.985
+  },
+  {
+    "Rank": 9,
+    "Model Name": "gpt-oss-20b (Groq)",
+    "Avg Score": 8.25,
+    "Accuracy": 8.48,
+    "Quality": 8.11,
+    "Educational": 8.16,
+    "Latency (ms)": 3026,
+    "Total Cost (USD)": 0.024645,
+    "Success Rate": 0.667
+  },
+  {
+    "Rank": 10,
+    "Model Name": "zai-glm-4.7 (Cerebras)",
+    "Avg Score": 8.25,
+    "Accuracy": 8.09,
+    "Quality": 8.47,
+    "Educational": 8.19,
+    "Latency (ms)": 7273,
+    "Total Cost (USD)": 0.671915,
+    "Success Rate": 0.97
+  },
+  {
+    "Rank": 11,
+    "Model Name": "GPT-4o-mini",
+    "Avg Score": 7.91,
+    "Accuracy": 7.98,
+    "Quality": 7.97,
+    "Educational": 7.77,
+    "Latency (ms)": 8387,
+    "Total Cost (USD)": 0.027311,
+    "Success Rate": 0.939
+  },
+  {
+    "Rank": 12,
+    "Model Name": "Gemma-E4B",
+    "Avg Score": 2.04,
+    "Accuracy": 1.3,
+    "Quality": 3.08,
+    "Educational": 1.73,
+    "Latency (ms)": 39006,
+    "Total Cost (USD)": 0.239012,
+    "Success Rate": 0.97
+  }
+]
