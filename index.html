@@ -1,7 +1,13 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduSim AI Benchmark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
   * {
     box-sizing: border-box;
     margin: 0;
@@ -282,12 +288,66 @@
     filter: brightness(1.05);
   }
 
-  @media(max-width:768px) {
+  .heatmap-table th, .heatmap-table td {
+    white-space: nowrap;
+  }
+
+  @media(max-width: 768px) {
     .grid2 {
-      grid-template-columns: 1fr
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .tabs {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+      padding: 6px;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .tab {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+  }
+
+  @media(max-width: 480px) {
+    .dash {
+      padding: 1rem 0.5rem;
+    }
+    .metrics {
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+    }
+    .mc {
+      padding: 12px 14px;
+    }
+    .mc-value {
+      font-size: 18px;
+    }
+    .mc-label {
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+    .mc-sub {
+      font-size: 10px;
+    }
+    .section {
+      padding: 16px;
+      margin-bottom: 1rem;
+    }
+    .chart-wrap {
+      height: 260px !important;
     }
   }
 </style>
+</head>
+<body>
 
 <div class="dash">
   <div class="dash-header">
@@ -662,7 +722,7 @@
       html += `</tr>`;
     });
     html += '</tbody></table>';
-    document.getElementById('costBreakdownTableContainer').innerHTML = html;
+    document.getElementById('costBreakdownTableContainer').innerHTML = '<div style="overflow-x:auto; width: 100%; -webkit-overflow-scrolling: touch;">' + html + '</div>';
   }
 
   function buildPerf() {
@@ -808,7 +868,7 @@
       html += `</tr>`;
     });
     html += '</tbody></table>';
-    document.getElementById('judgeBreakdownTableContainer').innerHTML = html;
+    document.getElementById('judgeBreakdownTableContainer').innerHTML = '<div style="overflow-x:auto; width: 100%; -webkit-overflow-scrolling: touch;">' + html + '</div>';
   }
 
   function buildJudgeCharts() {
@@ -885,3 +945,5 @@
     } catch (e) {}
   }, 300);
 </script>
+</body>
+</html>
